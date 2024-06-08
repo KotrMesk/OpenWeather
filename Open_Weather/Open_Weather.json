@@ -1,0 +1,418 @@
+{
+	"info": {
+		"_postman_id": "1aeb042d-014b-4e70-892e-958a95cb3d40",
+		"name": "Open Weather",
+		"description": "This collection was created for the API testing exercise.\n\nIt consists of 2 folders: positive test scenarios and negative test scenarios.\n\nThe positive test scenarios test: latitude and longitude coordinate validity, city and country data validity, weather condition validity.\n\nThe negative test scenarios test: Invalid API key, Invalid City name.\n\nAll scenarios have status code tests and response time tests. The response time tests are run from collection test. The status code tests are run from positive test scenario folder and seperately for each negative test scenarios.\n\nAll scenarios are tested with a city json data file that was taken from [https://bulk.openweathermap.org/sample/](https://bulk.openweathermap.org/sample/) site and edited so it only has 4 locations that can be run through collection run.\n\n#### **Positive Test Scenarios:**\n\n##### Latitude and longitude validation:\n\nIn the pre-request script - variables are set for the GET request from city json file: longitude and lattitude.\n\nIn the tests the first thing to check for is longitude and lattitude validity: longitude should be between -180 and 180 degrees, enything beyond is invalid longitude coordinate, lattitude should be between -90 and 90 degrees, enything beyond is invalid lattitude coordinate.\n\nThen the requested longitude and lattitude is checked against the responses longitude and lattitude. Since the response rounds a bit the longitude and lattitude and the rounding is inconsistent through out the responses, so a different approach was taken to test accuracy of the response - a tolerance was introduce to see if the response does not go far from the requested coordinates. Understandably that the difference could mean a whole new location so the tolerance was set to 0,01 so that the location would stay the same. This can be adjusted to get more accurate results.\n\n**City and country data validation:**\n\nIn the pre-request script - variables are set for the GET request from city json file: city and country code.\n\nIn the tests to check the city and country data validity in the response it was tested against the json data taken from open weather site. The following things were tested from the response against the request: city name, city Id and country code and country code validity as per REGEX (2-letter code).\n\n##### Weather condition validation:\n\nIn the pre-request script - city variable is set for the GET request from city json file.\n\nIn the test a weather condition code and main description dictionary was created to match the data in [https://openweathermap.org/weather-conditions](https://openweathermap.org/weather-conditions) site and it was used to test the response given weather code and main match. For further exploration it would be good to create a more detailed file that would test all the weather condition response, including: weather condition ID, weather condition main, description, icon code. But since it was required only to validate weather condition - current approach was taken.\n\n#### **Negative Test Scenarios:**\n\n##### Invalid API key:\n\nIn the pre-request script - a wrong api key variable is set for the GET request.\n\nIn the test it was checked for the status code and message in the response.\n\n##### Invalid City name:\n\nIn the pre-request script - a wrong city variable is set for the GET request\n\nIn the test it was checked for the status code and message in the response.\n\n**All the scenarios have a response time validity test - not to exceed 200ms**\n\n#### **How to set up:**\n\nBefore setting up, an API key is needed:\n\n- Navigate to [https://openweathermap.org/](https://openweathermap.org/)\n    \n- Create an account\n    \n- Verify email (after email verification an email will be sent with an already generated API key, that will be available in couple hours, you can copy it from there or continue to next steps)\n    \n- Navigate to [https://openweathermap.org/](https://openweathermap.org/)\n    \n- Click on your account and then on \"My API keys\"\n    \n- Copy API key\n    \n\nIn postman:\n\n- Open postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Positive test scenarios",
+			"item": [
+				{
+					"name": "Latitude/Longitude",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7428448-d8a9-4c54-88de-e9e72139dbc5",
+								"exec": [
+									"//set variable for response json\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//set variable for coordinate object in json file\r",
+									"var coord = pm.iterationData.get(\"coord\");\r",
+									"\r",
+									"//set tolerance variable, since the response gives a rounded coordinates\r",
+									"const tolerance = 0.01;\r",
+									"\r",
+									"//validate longitude, valid longitude suppose to be between -180 and 180 degrees, anything beyond is invalid\r",
+									"pm.test(\"Check longitude is valid\", function() {\r",
+									"    pm.expect(coord.lon).to.be.within(-180, 180);\r",
+									"});\r",
+									"\r",
+									"//validate lattitude, valid lattitude suppose to be between -90 and 90 degrees, anything beyond is invalid\r",
+									"pm.test(\"Check lattitude is valid\", function() {\r",
+									"    pm.expect(coord.lat).to.be.within(-90, 90);\r",
+									"});\r",
+									"\r",
+									"//test if the response matches the requested latitude with a tolerance\r",
+									"pm.test(`Check if requested lat: ${coord.lat} matches in response with a tolerance of ${tolerance}`, function () {\r",
+									"    pm.expect(coord.lat - jsonData.coord.lat).to.be.below(tolerance);\r",
+									"});\r",
+									"\r",
+									"//test if the response matches the requested longitude with a tolerance\r",
+									"pm.test(`Check if requested lat: ${coord.lon} matches in response with a tolerance of ${tolerance}`, function () {\r",
+									"    pm.expect(coord.lon - jsonData.coord.lon).to.be.below(tolerance);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "775470a0-36d7-4ce8-946d-f01c2a3b35cc",
+								"exec": [
+									"//set variable for coordinate object in city json file\r",
+									"var coord = pm.iterationData.get(\"coord\")\r",
+									"\r",
+									"//set lattitude and longitude as variables from json file\r",
+									"pm.environment.set(\"lon\", coord.lon);\r",
+									"pm.environment.set(\"lat\", coord.lat);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "643c42f6-a548-423e-97cc-a4bddcb155da",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}lat={{lat}}&lon={{lon}}&appid={{API key}}"
+					},
+					"response": []
+				},
+				{
+					"name": "City, Country",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d6a0e6f-bad7-4f88-a4c6-048a746707b0",
+								"exec": [
+									"//set variable for response json\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//test if the response matches the requested city\r",
+									"var testCity = pm.environment.get(\"City\");\r",
+									"pm.test(`Check if requested city: ${testCity} matches in response`, function () {\r",
+									"    pm.expect(jsonData.name).to.eql(testCity);\r",
+									"});\r",
+									"\r",
+									"//test if the response matches the requested country\r",
+									"var testCountry = pm.environment.get(\"Country\");\r",
+									"pm.test(`Check if requested country: ${testCountry} matches in response`, function () {\r",
+									"    pm.expect(jsonData.sys.country).to.eql(testCountry);\r",
+									"});\r",
+									"\r",
+									"//test if country code is valid 2-letter code (REGEX)\r",
+									"var patternAlpha2 = /^[A-Z]{2}$/;\r",
+									"pm.test(`Check if requested country: ${testCountry} code is a valid 2 letter alpha code`, function () {\r",
+									"    pm.expect(jsonData.sys.country).to.match(patternAlpha2);\r",
+									"});\r",
+									"\r",
+									"//test if the response has the correct city id\r",
+									"var testId = pm.iterationData.get(\"id\");\r",
+									"pm.test(`Check if requested city id: ${testId} matches in response`, function () {\r",
+									"    pm.expect(jsonData.id).to.eql(testId);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "18ff2879-7c44-4446-8fce-9afba52713e8",
+								"exec": [
+									"//set City variable from json file\r",
+									"pm.environment.set(\"City\", pm.iterationData.get(\"name\"));\r",
+									"\r",
+									"//set Country variable from json file\r",
+									"pm.environment.set(\"Country\", pm.iterationData.get(\"country\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "00fe7f00-65ed-4f02-a16e-81879f1adc0f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{url}}q={{City}},{{Country}}&appid={{API key}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Weather condition",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5229e68-cf0a-41bf-92ed-a037140c57e9",
+								"exec": [
+									"//Validate weather condition:\r",
+									"//set dictionary with values, taken from https://openweathermap.org/weather-conditions\r",
+									"let weatherConditions = {\r",
+									"    \"Thunderstorm\": [200, 201, 202, 210, 211, 212, 221, 230, 231, 232],\r",
+									"    \"Drizzle\": [300, 301, 302, 310, 311, 312, 313, 314, 321],\r",
+									"    \"Rain\": [500, 501, 502, 503, 504, 511, 520, 521, 522, 531],\r",
+									"    \"Snow\": [600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622],\r",
+									"    \"Mist\": [701],\r",
+									"    \"Smoke\": [711],\r",
+									"    \"Haze\": [721],\r",
+									"    \"Dust\": [731, 761],\r",
+									"    \"Fog\": [741],\r",
+									"    \"Sand\": [751],\r",
+									"    \"Ash\": [762],\r",
+									"    \"Squall\": [771],\r",
+									"    \"Tornado\": [781],\r",
+									"    \"Clear\": [800],\r",
+									"    \"Clouds\": [801, 802, 803, 804]\r",
+									"};\r",
+									"\r",
+									"//set variable for response json\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//set variable for weather id and main weather condition in response\r",
+									"var weatherId = jsonData.weather[0].id;\r",
+									"var weatherMain = jsonData.weather[0].main;\r",
+									"\r",
+									"//take weather condition id from response and search for it in weatherConditions dictionary and return matching main condition\r",
+									"function findConditionById(weatherConditions, weatherId) {\r",
+									"    for (let condition in weatherConditions) {\r",
+									"        if (weatherConditions[condition].includes(weatherId)) {\r",
+									"            return condition;\r",
+									"        }\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"//set a variable for found main weather condition \r",
+									"var mainCondition = findConditionById(weatherConditions, weatherId);\r",
+									"\r",
+									"//test weather conditions code and main group match\r",
+									"pm.test(`Check if city weather condition: ${weatherMain} matches weather condition id: ${weatherId}`, function () {\r",
+									"    pm.expect(weatherMain).to.eql(mainCondition);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1bb2aa37-b89f-4efd-89d6-a56baf89b546",
+								"exec": [
+									"//set City variable from json file\r",
+									"pm.environment.set(\"City\", pm.iterationData.get(\"name\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "42ee306c-474d-4419-93af-b007a186c7b4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}q={{City}}&appid={{API key}}"
+					},
+					"response": []
+				}
+			],
+			"id": "ec4a9a71-fca3-42e5-bf5e-8f98a77bd20e",
+			"description": "This folder includes positive test scenarios:\n\n- Validate city specific data\n- Validate weather condition\n- Validate coordinate data\n    \n- Country code is a valid 2-letter code (REGEX)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5012999b-5ea5-4297-a239-9a20938203e1",
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c36dbc2-dd2d-4b2d-bc3b-d1d11f97c151",
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"//check succesfull response\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Negative test scenarios",
+			"item": [
+				{
+					"name": "Invalid API key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3350e283-41f1-4d1b-9982-f73184636f6f",
+								"exec": [
+									"//validate status code 401\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"//validate response message\r",
+									"pm.test(\"Body matches string: Invalid API key\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Invalid API key.\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "216640f5-1f19-4924-aebd-e28409eb8d65",
+								"exec": [
+									"//set invalid api key\r",
+									"pm.environment.set(\"Invalid API key\", \"wrongapikey\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "bfb0c108-484f-44ea-a129-06cb9bc2a970",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}q={{City}},{{Country}}&appid={{Invalid API key}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid City name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "de648ca0-ce59-4f81-9dc2-cac78a72f968",
+								"exec": [
+									"//validate status code 401\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"//validate response message\r",
+									"pm.test(\"Body matches string: city not found\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"city not found\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "52e646e2-f98a-45c9-941f-922be3ffdfa1",
+								"exec": [
+									"//set invalid city name\r",
+									"pm.environment.set(\"Wrong City\", \"miestukas\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "57468898-33af-45ec-a7bb-63822234aac2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}q={{Wrong City}},{{Country}}&appid={{API key}}"
+					},
+					"response": []
+				}
+			],
+			"id": "8b40628a-7eba-471e-8f65-5274cbbffffa",
+			"description": "This folder includes negative scenarios:\n\n- Invalid API key\n    \n- Invalid city name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5c9630b2-6ae7-4232-9dce-8412338e1f2f",
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "91985ecd-1ff9-4be9-9d4a-a257d218b4c4",
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e566e3a4-629e-44a7-ac96-c113261246f8",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2ca5f1c3-bc28-4703-b0a1-f009257bd7f0",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"//check response time\r",
+					"pm.test(\"Response time is less than 200ms\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+					"});"
+				]
+			}
+		}
+	]
+}
