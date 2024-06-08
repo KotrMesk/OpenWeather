@@ -12,9 +12,9 @@ It also has the report json file and a readme file with instructions and descrip
 
 ### Latitude and longitude validation:
 
-In the pre-request script - variables are set for the GET request from city json file: longitude and lattitude.
-In the tests the first thing to check for is longitude and lattitude validity: longitude should be between -180 and 180 degrees, enything beyond is invalid longitude coordinate, lattitude should be between -90 and 90 degrees, enything beyond is invalid lattitude coordinate.
-Then the requested longitude and lattitude is checked against the responses longitude and lattitude. Since the response rounds a bit the longitude and lattitude and the rounding is inconsistent through out the responses, so a different approach was taken to test accuracy of the response - a tolerance was introduce to see if the response does not go far from the requested coordinates. Understandably that the difference could mean a whole new location so the tolerance was set to 0,01 so that the location would stay the same. This can be adjusted to get more accurate results.
+In the pre-request script - variables are set for the GET request from city json file: longitude and latitude.
+In the tests the first thing to check for is longitude and lattitude validity: longitude should be between -180 and 180 degrees, anything beyond is invalid longitude coordinate, latitude should be between -90 and 90 degrees, anything beyond is invalid latitude coordinate.
+Then the requested longitude and latitude is checked against the responses longitude and latitude. Since the response rounds a bit the longitude and latitude and the rounding is inconsistent through out the responses, so a different approach was taken to test accuracy of the response - a tolerance was introduce to see if the response does not go far from the requested coordinates. Understandably that the difference could mean a whole new location so the tolerance was set to 0,01 so that the location would stay the same. This can be adjusted to get more accurate results.
 
 ### City and country data validation:
 
@@ -65,6 +65,12 @@ In postman:
 - Click on files
 - Navigate to your extracted folders
 - Navigate OpenWeather-main -> Open_Weather and select the Open_Weather.json file
+- In case you want to use your own API key:
+ - In collections, next to Open Weather click on 3 dots
+ - Click on "edit"
+ - In the Open Weather tab, click on "Variables" tab
+ - Next to "API_key", under "Initial value" paste your API key
+
 
 To run a collection (run all tests with the city.json file):
 - In collections, next to Open weather click on the 3 dots
