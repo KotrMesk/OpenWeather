@@ -414,5 +414,11 @@
 				]
 			}
 		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://api.openweathermap.org/data/2.5/weather?"
+		}
 	]
 }
