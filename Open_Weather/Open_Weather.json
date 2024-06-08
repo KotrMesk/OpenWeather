@@ -61,8 +61,8 @@
 									"var coord = pm.iterationData.get(\"coord\")\r",
 									"\r",
 									"//set lattitude and longitude as variables from json file\r",
-									"pm.environment.set(\"lon\", coord.lon);\r",
-									"pm.environment.set(\"lat\", coord.lat);\r",
+									"pm.environment.set(\"LON\", coord.lon);\r",
+									"pm.environment.set(\"LAT\", coord.lat);\r",
 									""
 								],
 								"type": "text/javascript",
@@ -77,7 +77,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{url}}lat={{lat}}&lon={{lon}}&appid={{API key}}"
+						"url": "{{URL}}lat={{LAT}}&lon={{LON}}&appid={{API_key}}"
 					},
 					"response": []
 				},
@@ -419,6 +419,18 @@
 		{
 			"key": "URL",
 			"value": "https://api.openweathermap.org/data/2.5/weather?"
+		},
+		{
+			"key": "LAT",
+			"value": "54.6872"
+		},
+		{
+			"key": "LON",
+			"value": "[{\"key\":\"lon\",\"value\":\"25.2797\",\"enabled\":true,\"sessionValue\":18,\"sessionIndex\":3}]"
+		},
+		{
+			"key": "API_key",
+			"value": "624e1a2bf2722e53041d5c1ac8069223"
 		}
 	]
 }
