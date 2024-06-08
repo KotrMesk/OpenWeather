@@ -41,7 +41,7 @@ In the test it was checked for the status code and message in the response.
 All the scenarios have a response time validity test - not to exceed 200ms
 
 
-### How to set up:
+## How to set up:
 
 Before setting up, an API key is needed:
  - Navigate to https://openweathermap.org/
