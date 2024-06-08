@@ -1,0 +1,485 @@
+{
+	"id": "dd709bb1-a7f3-472b-b963-ab442acc3fdc",
+	"name": "Open Weather",
+	"timestamp": "2024-06-08T19:18:15.282Z",
+	"collection_id": "26224304-1aeb042d-014b-4e70-892e-958a95cb3d40",
+	"folder_id": 0,
+	"environment_id": "26224304-26a9e969-c535-4c08-9d82-bda423c55ae0",
+	"totalPass": 103,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-06-08T19:18:12.056Z",
+	"totalFail": 2,
+	"results": [
+		{
+			"id": "643c42f6-a548-423e-97cc-a4bddcb155da",
+			"name": "Latitude/Longitude",
+			"url": "https://api.openweathermap.org/data/2.5/weather?lat=59.5&lon=18&appid=624e1a2bf2722e53041d5c1ac8069223",
+			"time": 36,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 200ms": true,
+				"Status code is 200": true,
+				"Check longitude is valid": true,
+				"Check lattitude is valid": true,
+				"Check if requested lat: 59.5 matches in response with a tolerance of 0.01": true,
+				"Check if requested lat: 18 matches in response with a tolerance of 0.01": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 200ms": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Check longitude is valid": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Check lattitude is valid": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Check if requested lat: 54.689159 matches in response with a tolerance of 0.01": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested lat: 25.2798 matches in response with a tolerance of 0.01": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested lat: 54.900002 matches in response with a tolerance of 0.01": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested lat: 23.9 matches in response with a tolerance of 0.01": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested lat: 51.50853 matches in response with a tolerance of 0.01": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested lat: -0.12574 matches in response with a tolerance of 0.01": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested lat: 59.5 matches in response with a tolerance of 0.01": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested lat: 18 matches in response with a tolerance of 0.01": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				111,
+				37,
+				37,
+				41,
+				36
+			],
+			"allTests": [
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check longitude is valid": true,
+					"Check lattitude is valid": true,
+					"Check if requested lat: 54.689159 matches in response with a tolerance of 0.01": true,
+					"Check if requested lat: 25.2798 matches in response with a tolerance of 0.01": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check longitude is valid": true,
+					"Check lattitude is valid": true,
+					"Check if requested lat: 54.900002 matches in response with a tolerance of 0.01": true,
+					"Check if requested lat: 23.9 matches in response with a tolerance of 0.01": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check longitude is valid": true,
+					"Check lattitude is valid": true,
+					"Check if requested lat: 51.50853 matches in response with a tolerance of 0.01": true,
+					"Check if requested lat: -0.12574 matches in response with a tolerance of 0.01": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check longitude is valid": true,
+					"Check lattitude is valid": true,
+					"Check if requested lat: 59.5 matches in response with a tolerance of 0.01": true,
+					"Check if requested lat: 18 matches in response with a tolerance of 0.01": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check longitude is valid": true,
+					"Check lattitude is valid": true,
+					"Check if requested lat: 59.5 matches in response with a tolerance of 0.01": true,
+					"Check if requested lat: 18 matches in response with a tolerance of 0.01": true
+				}
+			]
+		},
+		{
+			"id": "00fe7f00-65ed-4f02-a16e-81879f1adc0f",
+			"name": "City, Country",
+			"url": "https://api.openweathermap.org/data/2.5/weather?q=Stockholm,SE&appid=624e1a2bf2722e53041d5c1ac8069223",
+			"time": 36,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 200ms": true,
+				"Status code is 200": true,
+				"Check if requested city: Stockholm matches in response": true,
+				"Check if requested country: SE matches in response": true,
+				"Check if requested country: SE code is a valid 2 letter alpha code": true,
+				"Check if requested city id: 2673722 matches in response": false
+			},
+			"testPassFailCounts": {
+				"Response time is less than 200ms": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Check if requested city: Vilnius matches in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested country: LT matches in response": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Check if requested country: LT code is a valid 2 letter alpha code": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Check if requested city id: 593116 matches in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested city: Kaunas matches in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested city id: 598316 matches in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested city: London matches in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested country: GB matches in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested country: GB code is a valid 2 letter alpha code": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested city id: 2643743 matches in response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if requested city: Stockholm matches in response": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Check if requested country: SE matches in response": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Check if requested country: SE code is a valid 2 letter alpha code": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Check if requested city id: 2673722 matches in response": {
+					"pass": 0,
+					"fail": 2
+				}
+			},
+			"times": [
+				36,
+				47,
+				40,
+				36,
+				36
+			],
+			"allTests": [
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if requested city: Vilnius matches in response": true,
+					"Check if requested country: LT matches in response": true,
+					"Check if requested country: LT code is a valid 2 letter alpha code": true,
+					"Check if requested city id: 593116 matches in response": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if requested city: Kaunas matches in response": true,
+					"Check if requested country: LT matches in response": true,
+					"Check if requested country: LT code is a valid 2 letter alpha code": true,
+					"Check if requested city id: 598316 matches in response": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if requested city: London matches in response": true,
+					"Check if requested country: GB matches in response": true,
+					"Check if requested country: GB code is a valid 2 letter alpha code": true,
+					"Check if requested city id: 2643743 matches in response": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if requested city: Stockholm matches in response": true,
+					"Check if requested country: SE matches in response": true,
+					"Check if requested country: SE code is a valid 2 letter alpha code": true,
+					"Check if requested city id: 2673722 matches in response": false
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if requested city: Stockholm matches in response": true,
+					"Check if requested country: SE matches in response": true,
+					"Check if requested country: SE code is a valid 2 letter alpha code": true,
+					"Check if requested city id: 2673722 matches in response": false
+				}
+			]
+		},
+		{
+			"id": "42ee306c-474d-4419-93af-b007a186c7b4",
+			"name": "Weather condition",
+			"url": "https://api.openweathermap.org/data/2.5/weather?q=Stockholm&appid=624e1a2bf2722e53041d5c1ac8069223",
+			"time": 36,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 200ms": true,
+				"Status code is 200": true,
+				"Check if city weather condition: Clouds matches weather condition id: 804": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 200ms": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Check if city weather condition: Clear matches weather condition id: 800": {
+					"pass": 3,
+					"fail": 0
+				},
+				"Check if city weather condition: Clouds matches weather condition id: 804": {
+					"pass": 2,
+					"fail": 0
+				}
+			},
+			"times": [
+				35,
+				37,
+				36,
+				36,
+				36
+			],
+			"allTests": [
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if city weather condition: Clear matches weather condition id: 800": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if city weather condition: Clear matches weather condition id: 800": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if city weather condition: Clear matches weather condition id: 800": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if city weather condition: Clouds matches weather condition id: 804": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 200": true,
+					"Check if city weather condition: Clouds matches weather condition id: 804": true
+				}
+			]
+		},
+		{
+			"id": "bfb0c108-484f-44ea-a129-06cb9bc2a970",
+			"name": "Invalid API key",
+			"url": "https://api.openweathermap.org/data/2.5/weather?q=Stockholm,SE&appid=wrongapikey",
+			"time": 59,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Response time is less than 200ms": true,
+				"Status code is 401": true,
+				"Body matches string: Invalid API key": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 200ms": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Status code is 401": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Body matches string: Invalid API key": {
+					"pass": 5,
+					"fail": 0
+				}
+			},
+			"times": [
+				36,
+				35,
+				36,
+				36,
+				59
+			],
+			"allTests": [
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 401": true,
+					"Body matches string: Invalid API key": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 401": true,
+					"Body matches string: Invalid API key": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 401": true,
+					"Body matches string: Invalid API key": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 401": true,
+					"Body matches string: Invalid API key": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 401": true,
+					"Body matches string: Invalid API key": true
+				}
+			]
+		},
+		{
+			"id": "57468898-33af-45ec-a7bb-63822234aac2",
+			"name": "Invalid City name",
+			"url": "https://api.openweathermap.org/data/2.5/weather?q=miestukas,SE&appid=624e1a2bf2722e53041d5c1ac8069223",
+			"time": 37,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Response time is less than 200ms": true,
+				"Status code is 404": true,
+				"Body matches string: city not found": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 200ms": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Status code is 404": {
+					"pass": 5,
+					"fail": 0
+				},
+				"Body matches string: city not found": {
+					"pass": 5,
+					"fail": 0
+				}
+			},
+			"times": [
+				40,
+				43,
+				48,
+				50,
+				37
+			],
+			"allTests": [
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 404": true,
+					"Body matches string: city not found": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 404": true,
+					"Body matches string: city not found": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 404": true,
+					"Body matches string: city not found": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 404": true,
+					"Body matches string: city not found": true
+				},
+				{
+					"Response time is less than 200ms": true,
+					"Status code is 404": true,
+					"Body matches string: city not found": true
+				}
+			]
+		}
+	],
+	"count": 5,
+	"totalTime": 1057,
+	"collection": {
+		"requests": [
+			{
+				"id": "643c42f6-a548-423e-97cc-a4bddcb155da",
+				"method": "GET"
+			},
+			{
+				"id": "00fe7f00-65ed-4f02-a16e-81879f1adc0f",
+				"method": "GET"
+			},
+			{
+				"id": "42ee306c-474d-4419-93af-b007a186c7b4",
+				"method": "GET"
+			},
+			{
+				"id": "bfb0c108-484f-44ea-a129-06cb9bc2a970",
+				"method": "GET"
+			},
+			{
+				"id": "57468898-33af-45ec-a7bb-63822234aac2",
+				"method": "GET"
+			}
+		]
+	}
+}

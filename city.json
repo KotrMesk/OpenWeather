@@ -1,0 +1,42 @@
+[    
+    {
+        "id": 593116,
+        "name": "Vilnius",
+        "state": "",
+        "country": "LT",
+        "coord": {
+            "lon": 25.2798,
+            "lat": 54.689159
+        }
+    },
+    {
+        "id": 598316,
+        "name": "Kaunas",
+        "state": "",
+        "country": "LT",
+        "coord": {
+            "lon": 23.9,
+            "lat": 54.900002
+        }
+    },
+    {
+        "id": 2643743,
+        "name": "London",
+        "state": "",
+        "country": "GB",
+        "coord": {
+            "lon": -0.12574,
+            "lat": 51.50853
+        }
+    },
+    {
+        "id": 2673722,
+        "name": "Stockholm",
+        "state": "",
+        "country": "SE",
+        "coord": {
+            "lon": 18.0,
+            "lat": 59.5
+        }
+    }
+]
