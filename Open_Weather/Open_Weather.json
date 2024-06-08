@@ -93,13 +93,13 @@
 									"var jsonData = pm.response.json();\r",
 									"\r",
 									"//test if the response matches the requested city\r",
-									"var testCity = pm.environment.get(\"City\");\r",
+									"var testCity = pm.environment.get(\"CITY\");\r",
 									"pm.test(`Check if requested city: ${testCity} matches in response`, function () {\r",
 									"    pm.expect(jsonData.name).to.eql(testCity);\r",
 									"});\r",
 									"\r",
 									"//test if the response matches the requested country\r",
-									"var testCountry = pm.environment.get(\"Country\");\r",
+									"var testCountry = pm.environment.get(\"COUNTRY\");\r",
 									"pm.test(`Check if requested country: ${testCountry} matches in response`, function () {\r",
 									"    pm.expect(jsonData.sys.country).to.eql(testCountry);\r",
 									"});\r",
@@ -128,10 +128,10 @@
 								"id": "18ff2879-7c44-4446-8fce-9afba52713e8",
 								"exec": [
 									"//set City variable from json file\r",
-									"pm.environment.set(\"City\", pm.iterationData.get(\"name\"));\r",
+									"pm.environment.set(\"CITY\", pm.iterationData.get(\"name\"));\r",
 									"\r",
 									"//set Country variable from json file\r",
-									"pm.environment.set(\"Country\", pm.iterationData.get(\"country\"));"
+									"pm.environment.set(\"COUNTRY\", pm.iterationData.get(\"country\"));"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -149,7 +149,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"url": "{{url}}q={{City}},{{Country}}&appid={{API key}}"
+						"url": "{{URL}}q={{CITY}},{{COUNTRY}}&appid={{API_key}}"
 					},
 					"response": []
 				},
@@ -215,7 +215,7 @@
 								"id": "1bb2aa37-b89f-4efd-89d6-a56baf89b546",
 								"exec": [
 									"//set City variable from json file\r",
-									"pm.environment.set(\"City\", pm.iterationData.get(\"name\"));"
+									"pm.environment.set(\"CITY\", pm.iterationData.get(\"name\"));"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -229,7 +229,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{url}}q={{City}}&appid={{API key}}"
+						"url": "{{URL}}q={{CITY}}&appid={{API_key}}"
 					},
 					"response": []
 				}
@@ -295,7 +295,7 @@
 								"id": "216640f5-1f19-4924-aebd-e28409eb8d65",
 								"exec": [
 									"//set invalid api key\r",
-									"pm.environment.set(\"Invalid API key\", \"wrongapikey\");"
+									"pm.environment.set(\"Invalid_API_key\", \"wrongapikey\");"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -309,7 +309,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{url}}q={{City}},{{Country}}&appid={{Invalid API key}}"
+						"url": "{{URL}}q={{CITY}},{{COUNTRY}}&appid={{Invalid_API_key}}"
 					},
 					"response": []
 				},
@@ -341,7 +341,7 @@
 								"id": "52e646e2-f98a-45c9-941f-922be3ffdfa1",
 								"exec": [
 									"//set invalid city name\r",
-									"pm.environment.set(\"Wrong City\", \"miestukas\");"
+									"pm.environment.set(\"Wrong_City\", \"miestukas\");"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -355,7 +355,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{url}}q={{Wrong City}},{{Country}}&appid={{API key}}"
+						"url": "{{URL}}q={{Wrong_City}}&appid={{API_key}}"
 					},
 					"response": []
 				}
@@ -431,6 +431,22 @@
 		{
 			"key": "API_key",
 			"value": "624e1a2bf2722e53041d5c1ac8069223"
+		},
+		{
+			"key": "CITY",
+			"value": "Vilnius"
+		},
+		{
+			"key": "COUNTRY",
+			"value": "LT"
+		},
+		{
+			"key": "Invalid_API_key",
+			"value": "624e1a2bf2722e53041d5c1ac8069223"
+		},
+		{
+			"key": "Wrong_City",
+			"value": "Vilnius"
 		}
 	]
 }
