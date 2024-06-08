@@ -44,19 +44,19 @@ All the scenarios have a response time validity test - not to exceed 200ms
 How to set up:
 
 Before setting up, an API key is needed:
-  Navigate to https://openweathermap.org/
-  Create an account
-  Verify email (after email verification an email will be sent with an already generated API key, that will be available in couple hours, you can copy it from there or continue to next steps)
-  Navigate to https://openweathermap.org/
-  Click on your account and then on "My API keys"
-  Copy API key
+ - Navigate to https://openweathermap.org/
+ - Create an account
+ - Verify email (after email verification an email will be sent with an already generated API key, that will be available in couple hours, you can copy it from there or continue to next steps)
+ - Navigate to https://openweathermap.org/
+ - Click on your account and then on "My API keys"
+ - Copy API key
 
 But an environment variable for API key is already set and can be used for the test run.
 
 In postman:
 
-  Open postman
-  Click on "Import" - a popup dialog window will appear
-  In the bottom click on "other sources" and choose github
+ - Open postman
+ - Click on "Import" - a popup dialog window will appear
+ - In the bottom click on "other sources" and choose github
 
 
