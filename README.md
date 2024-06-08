@@ -53,10 +53,26 @@ Before setting up, an API key is needed:
 
 But an environment variable for API key is already set and can be used for the test run.
 
-In postman:
+In github:
+- You must have a github account
+- Navigate to https://github.com/KotrMesk/OpenWeather.git
+- Under code click "download zip"
 
- - Open postman
- - Click on "Import" - a popup dialog window will appear
- - In the bottom click on "other sources" and choose github
+After download extract files from zip
+In postman:
+- Open postman
+- Click on "Import" - a popup dialog window will appear
+- Click on files
+- Navigate to your extracted folders
+- Navigate OpenWeather-main -> Open_Weather and select the Open_Weather.json file
+
+To run a collection (run all tests with the city.json file):
+- In collections, next to Open weather click on the 3 dots
+- Click on "Run collection"
+- Under the "Functional" tab, under the "Data" click on "select file"
+- Navigate to your extracted folder and select "City.json" file
+- Click "Run Open Weather"
+
+
 
 
